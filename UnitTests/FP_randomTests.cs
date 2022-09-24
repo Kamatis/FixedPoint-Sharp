@@ -57,8 +57,8 @@ namespace UnitTests {
         {
             var random = new Random(345345346);
             for (uint i = 5; i < 100; i++) {
-                var val = random.NextFp(fp._100);
-                val.Should().BeLessThan(fp._100);
+                var val = random.NextFp(Fixed._100);
+                val.Should().BeLessThan(Fixed._100);
             }
         }
         
@@ -67,8 +67,8 @@ namespace UnitTests {
         {
             var random = new Random(345345346);
             for (uint i = 5; i < 100; i++) {
-                var val = random.NextFp(fp._99, fp._100);
-                val.Should().BeInRange(fp._99, fp._100);
+                var val = random.NextFp(Fixed._99, Fixed._100);
+                val.Should().BeInRange(Fixed._99, Fixed._100);
             }
         }
     }

@@ -13,40 +13,40 @@ namespace UnitTests
         [Test]
         public void ToStringTest()
         {
-            var originalFp = fp._1 - fp._0_01;
+            var originalFp = Fixed._1 - Fixed._0_01;
             Math.Round(originalFp.AsDouble, ROUNDING).ToString(PRECISION_FORMAT, CultureInfo.InvariantCulture).Should().Be("0.9900");
             
-            originalFp = fp._1 - fp._0_01 *fp._0_01;
+            originalFp = Fixed._1 - Fixed._0_01 *Fixed._0_01;
             Math.Round(originalFp.AsDouble, ROUNDING).ToString(PRECISION_FORMAT, CultureInfo.InvariantCulture).Should().Be("0.9999");
             
-            originalFp = fp._1;
+            originalFp = Fixed._1;
             Math.Round(originalFp.AsDouble, ROUNDING).ToString(PRECISION_FORMAT, CultureInfo.InvariantCulture).Should().Be("1.0000");
             
-            originalFp = fp._1 + fp._0_01;
+            originalFp = Fixed._1 + Fixed._0_01;
             Math.Round(originalFp.AsDouble, ROUNDING).ToString(PRECISION_FORMAT, CultureInfo.InvariantCulture).Should().Be("1.0100");
             
-            originalFp = fp._1 + fp._0_01 * fp._0_01;
+            originalFp = Fixed._1 + Fixed._0_01 * Fixed._0_01;
             Math.Round(originalFp.AsDouble, ROUNDING).ToString(PRECISION_FORMAT, CultureInfo.InvariantCulture).Should().Be("1.0001");
             
-            originalFp = fp._0_01;
+            originalFp = Fixed._0_01;
             Math.Round(originalFp.AsDouble, ROUNDING).ToString(PRECISION_FORMAT, CultureInfo.InvariantCulture).Should().Be("0.0100");
             
-            originalFp = fp._0_50;
+            originalFp = Fixed._0_50;
             Math.Round(originalFp.AsDouble, ROUNDING).ToString(PRECISION_FORMAT, CultureInfo.InvariantCulture).Should().Be("0.5000");
         }
         
         [Test]
         public void SlowStringParsingTest() {
-            fp.Parse("5").AsFloatRounded.Should().BeApproximately(5, 0.0001f);
-            fp.Parse("5.").AsFloatRounded.Should().BeApproximately(5, 0.0001f);
-            fp.Parse(".1").AsFloatRounded.Should().BeApproximately(0.1f, 0.0001f);
-            fp.Parse("5.1").AsFloatRounded.Should().BeApproximately(5.1f, 0.0001f);
-            fp.Parse("5.45111111").AsFloatRounded.Should().BeApproximately(5.4511f, 0.0001f);
+            Fixed.Parse("5").AsFloatRounded.Should().BeApproximately(5, 0.0001f);
+            Fixed.Parse("5.").AsFloatRounded.Should().BeApproximately(5, 0.0001f);
+            Fixed.Parse(".1").AsFloatRounded.Should().BeApproximately(0.1f, 0.0001f);
+            Fixed.Parse("5.1").AsFloatRounded.Should().BeApproximately(5.1f, 0.0001f);
+            Fixed.Parse("5.45111111").AsFloatRounded.Should().BeApproximately(5.4511f, 0.0001f);
             
-            fp.Parse("-5").AsFloatRounded.Should().BeApproximately(-5, 0.0001f);
-            fp.Parse("-5.").AsFloatRounded.Should().BeApproximately(-5, 0.0001f);
-            fp.Parse("-.1").AsFloatRounded.Should().BeApproximately(-0.1f, 0.0001f);
-            fp.Parse("-5.1").AsFloatRounded.Should().BeApproximately(-5.1f, 0.0001f);
+            Fixed.Parse("-5").AsFloatRounded.Should().BeApproximately(-5, 0.0001f);
+            Fixed.Parse("-5.").AsFloatRounded.Should().BeApproximately(-5, 0.0001f);
+            Fixed.Parse("-.1").AsFloatRounded.Should().BeApproximately(-0.1f, 0.0001f);
+            Fixed.Parse("-5.1").AsFloatRounded.Should().BeApproximately(-5.1f, 0.0001f);
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace UnitTests
 
             for (var v = from; v < to; v += delta) {
                 var parsedString       = Math.Round(v, ROUNDING).ToString(PRECISION_FORMAT, CultureInfo.InvariantCulture);
-                var parsedFp           = fp.Parse(parsedString);
+                var parsedFp           = Fixed.Parse(parsedString);
                 var convertedBackFloat = parsedFp.AsDouble;
                 convertedBackFloat.Should().BeApproximately(v, 0.0001);
             }
@@ -71,7 +71,7 @@ namespace UnitTests
 
             for (var v = from; v < to; v += delta) {
                 var parsedString       = Math.Round(v, ROUNDING).ToString(PRECISION_FORMAT, CultureInfo.InvariantCulture);
-                var parsedFp           = fp.ParseUnsafe(parsedString);
+                var parsedFp           = Fixed.ParseUnsafe(parsedString);
                 var convertedBackFloat = parsedFp.AsDouble;
                 convertedBackFloat.Should().BeApproximately(v, 0.0001);
             }
@@ -84,7 +84,7 @@ namespace UnitTests
             var delta = 0.0001;
 
             for (var v = from; v < to; v += delta) {
-                var parsedFp = fp.ParseUnsafe((float)v);
+                var parsedFp = Fixed.ParseUnsafe((float)v);
                 var convertedBackFloat = parsedFp.AsDouble;
                 convertedBackFloat.Should().BeApproximately(v, 0.0001);
             }
@@ -98,7 +98,7 @@ namespace UnitTests
 
             for (float v = from; v < to; v += delta) {
                 var originalInt = (int) Math.Floor(v);
-                var parsedFp           = fp.ParseUnsafe(v);
+                var parsedFp           = Fixed.ParseUnsafe(v);
                 var convertedBack = parsedFp.AsInt;
                 convertedBack.Should().Be(originalInt);
             }

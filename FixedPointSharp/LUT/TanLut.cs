@@ -1,5 +1,5 @@
 namespace Deterministic.FixedPoint {
-    public static partial class fixlut {
+    public static partial class FixedLut {
         public static readonly int[] TanLut = {
             0, 804, 1609, 2414, 3220, 4026, 4834, 5644, 6455, 7268,
             8083, 8901, 9721, 10545, 11372, 12202, 13036, 13874, 14717, 15564,

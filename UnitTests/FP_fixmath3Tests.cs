@@ -9,35 +9,35 @@ namespace UnitTests
         [Test]
         public void NormalizationTest()
         {
-            var originalVector = new fp3(fp._5, fp._0, fp._0);
-            var modifiedVector = fixmath.Normalize(originalVector);
+            var originalVector = new Fixed3(Fixed._5, Fixed._0, Fixed._0);
+            var modifiedVector = FixedMath.Normalize(originalVector);
 
-            modifiedVector.Should().Be(new fp3(fp._1, fp._0, fp._0));
+            modifiedVector.Should().Be(new Fixed3(Fixed._1, Fixed._0, Fixed._0));
         }
         
         [Test]
         public void MagnitudeTest()
         {
-            var originalVector = new fp3(fp._5, fp._0, fp._0);
-            var magnitude = fixmath.Magnitude(originalVector);
+            var originalVector = new Fixed3(Fixed._5, Fixed._0, Fixed._0);
+            var magnitude = FixedMath.Magnitude(originalVector);
 
-            magnitude.Should().Be(fp._5);
+            magnitude.Should().Be(Fixed._5);
         }   
         
         [Test]
         public void MagnitudeSqrTest()
         {
-            var originalVector = new fp3(fp._5, fp._0, fp._0);
-            var magnitude      = fixmath.MagnitudeSqr(originalVector);
+            var originalVector = new Fixed3(Fixed._5, Fixed._0, Fixed._0);
+            var magnitude      = FixedMath.MagnitudeSqr(originalVector);
 
-            magnitude.Should().Be(fp._5 * fp._5);
+            magnitude.Should().Be(Fixed._5 * Fixed._5);
         }
 
         [Test]
         public void MagnitudeClampTest()
         {
-            var originalVector = new fp3(fp._5, fp._0, fp._0);
-            var clampedVector      = fixmath.MagnitudeClamp(originalVector, fp._1_10);
+            var originalVector = new Fixed3(Fixed._5, Fixed._0, Fixed._0);
+            var clampedVector      = FixedMath.MagnitudeClamp(originalVector, Fixed._1_10);
 
             clampedVector.x.AsFloat.Should().BeApproximately(1.10f, 0.01f);
             clampedVector.y.AsFloat.Should().Be(0f);
@@ -47,21 +47,21 @@ namespace UnitTests
         [Test]
         public void DotTest()
         {
-            var vector1 = new fp3(fp._5, fp._0, fp._0);
-            var vector2 = new fp3(fp._5, fp._0, fp._0);
-            var dot = fixmath.Dot(vector1, vector2);
+            var vector1 = new Fixed3(Fixed._5, Fixed._0, Fixed._0);
+            var vector2 = new Fixed3(Fixed._5, Fixed._0, Fixed._0);
+            var dot = FixedMath.Dot(vector1, vector2);
 
-            dot.Should().Be(fp._5 * fp._5);
+            dot.Should().Be(Fixed._5 * Fixed._5);
             
-            vector1 = new fp3(fp._1, fp._5, fp._4);
-            vector2 = new fp3(fp._2, fp._0, fp._1);
-            dot     = fixmath.Dot(vector1, vector2);
+            vector1 = new Fixed3(Fixed._1, Fixed._5, Fixed._4);
+            vector2 = new Fixed3(Fixed._2, Fixed._0, Fixed._1);
+            dot     = FixedMath.Dot(vector1, vector2);
 
-            dot.Should().Be(fp._6);
+            dot.Should().Be(Fixed._6);
             
-            vector1 = new fp3(fp._0_10, fp._0_75,   fp._0_10);
-            vector2 = new fp3(fp._0_50+fp._0_10, fp._0_20, fp._0_33);
-            dot     = fixmath.Dot(vector1, vector2);
+            vector1 = new Fixed3(Fixed._0_10, Fixed._0_75,   Fixed._0_10);
+            vector2 = new Fixed3(Fixed._0_50+Fixed._0_10, Fixed._0_20, Fixed._0_33);
+            dot     = FixedMath.Dot(vector1, vector2);
 
             var str = $"{vector1.x.AsFloat},{vector1.y.value},{vector1.z.value} | {vector2} {dot}";
 
@@ -71,15 +71,15 @@ namespace UnitTests
         [Test]
         public void AngleTest()
         {
-            var vector1 = new fp3(fp._1, fp._5, fp._4);
-            var vector2 = new fp3(fp._2, fp._0, fp._1);
-            var angle     = fixmath.Angle(vector1, vector2);
+            var vector1 = new Fixed3(Fixed._1, Fixed._5, Fixed._4);
+            var vector2 = new Fixed3(Fixed._2, Fixed._0, Fixed._1);
+            var angle     = FixedMath.Angle(vector1, vector2);
 
             angle.AsInt.Should().Be(65);
             
-            vector1 = new fp3(fp._2, fp._1,   fp._1);
-            vector2 = new fp3(fp._2, fp._0, fp._1);
-            angle = fixmath.Angle(vector1, vector2);
+            vector1 = new Fixed3(Fixed._2, Fixed._1,   Fixed._1);
+            vector2 = new Fixed3(Fixed._2, Fixed._0, Fixed._1);
+            angle = FixedMath.Angle(vector1, vector2);
 
             angle.AsInt.Should().Be(24);
         }
@@ -87,15 +87,15 @@ namespace UnitTests
         [Test]
         public void AngleSignedTest()
         {
-            var vector1 = new fp3(fp._1, fp._5,   fp._4);
-            var vector2 = new fp3(fp._2, fp._0, fp._1);
-            var angle   = fixmath.AngleSigned(vector1, vector2, fp3.up);
+            var vector1 = new Fixed3(Fixed._1, Fixed._5,   Fixed._4);
+            var vector2 = new Fixed3(Fixed._2, Fixed._0, Fixed._1);
+            var angle   = FixedMath.AngleSigned(vector1, vector2, Fixed3.up);
 
             angle.AsInt.Should().Be(65);
             
-            vector1 = new fp3(-fp._2, fp._1,   fp._1);
-            vector2 = new fp3(fp._2, fp._1, fp._1);
-            angle   = fixmath.AngleSigned(vector1, vector2, fp3.up);
+            vector1 = new Fixed3(-Fixed._2, Fixed._1,   Fixed._1);
+            vector2 = new Fixed3(Fixed._2, Fixed._1, Fixed._1);
+            angle   = FixedMath.AngleSigned(vector1, vector2, Fixed3.up);
 
             angle.AsFloat.Should().BeApproximately(109.47f, 0.1f);
         }
@@ -103,15 +103,15 @@ namespace UnitTests
         [Test]
         public void RadiansTest()
         {
-            var vector1 = new fp3(fp._1, fp._5,   fp._4);
-            var vector2 = new fp3(fp._2, fp._0, fp._1);
-            var angle   = fixmath.Radians(vector1, vector2);
+            var vector1 = new Fixed3(Fixed._1, Fixed._5,   Fixed._4);
+            var vector2 = new Fixed3(Fixed._2, Fixed._0, Fixed._1);
+            var angle   = FixedMath.Radians(vector1, vector2);
 
             angle.AsInt.Should().Be(1);
             
-            vector1 = new fp3(fp._2, fp._1,   fp._1);
-            vector2 = new fp3(fp._2, fp._0, fp._1);
-            angle   = fixmath.Radians(vector1, vector2);
+            vector1 = new Fixed3(Fixed._2, Fixed._1,   Fixed._1);
+            vector2 = new Fixed3(Fixed._2, Fixed._0, Fixed._1);
+            angle   = FixedMath.Radians(vector1, vector2);
             
             angle.AsFloat.Should().BeApproximately(0.42f, 0.01f);
         }
@@ -119,64 +119,64 @@ namespace UnitTests
         [Test]
         public void CrossTest()
         {
-            var vector1 = new fp3(fp._1, fp._5,   fp._4);
-            var vector2 = new fp3(fp._2, fp._0, fp._1);
-            var cross   = fixmath.Cross(vector1, vector2);
+            var vector1 = new Fixed3(Fixed._1, Fixed._5,   Fixed._4);
+            var vector2 = new Fixed3(Fixed._2, Fixed._0, Fixed._1);
+            var cross   = FixedMath.Cross(vector1, vector2);
 
-            cross.Should().Be(new fp3(fp._5, fp._7, -fp._10));
+            cross.Should().Be(new Fixed3(Fixed._5, Fixed._7, -Fixed._10));
         }
 
         [Test]
         public void ReflectTest()
         {
-            var vector     = new fp3(fp._5,  fp._0,   fp._5);
-            var normal     = new fp3(-fp._1, fp._0, fp._0);
-            var reflection = fixmath.Reflect(vector, normal);
+            var vector     = new Fixed3(Fixed._5,  Fixed._0,   Fixed._5);
+            var normal     = new Fixed3(-Fixed._1, Fixed._0, Fixed._0);
+            var reflection = FixedMath.Reflect(vector, normal);
 
-            reflection.Should().Be(new fp3(-fp._5, fp._0, fp._5));
+            reflection.Should().Be(new Fixed3(-Fixed._5, Fixed._0, Fixed._5));
         }
         
         [Test]
         public void ProjectTest()
         {
-            var vector     = new fp3(fp._5,  fp._0, fp._5);
-            var normal     = new fp3(-fp._1, fp._0, fp._0);
-            var projection = fixmath.Project(vector, normal);
+            var vector     = new Fixed3(Fixed._5,  Fixed._0, Fixed._5);
+            var normal     = new Fixed3(-Fixed._1, Fixed._0, Fixed._0);
+            var projection = FixedMath.Project(vector, normal);
 
-            projection.Should().Be(new fp3(fp._5, fp._0, fp._0));
+            projection.Should().Be(new Fixed3(Fixed._5, Fixed._0, Fixed._0));
         }
 
         [Test]
         public void ProjectOnPlaneTest()
         {
-            var vector     = new fp3(fp._5,  fp._1, fp._5);
-            var normal     = new fp3(-fp._1, fp._0, fp._0);
-            var projection = fixmath.ProjectOnPlane(vector, normal);
+            var vector     = new Fixed3(Fixed._5,  Fixed._1, Fixed._5);
+            var normal     = new Fixed3(-Fixed._1, Fixed._0, Fixed._0);
+            var projection = FixedMath.ProjectOnPlane(vector, normal);
 
-            projection.Should().Be(new fp3(fp._0, fp._1, fp._5));
+            projection.Should().Be(new Fixed3(Fixed._0, Fixed._1, Fixed._5));
         }
 
         [Test]
         public void LerpTest()
         {
-            var @from     = new fp3(fp._5,  fp._0,   fp._5);
-            var to     = new fp3(fp._0, fp._0, fp._0);
-            var lerped = fixmath.Lerp(@from, to, fp._0_50);
+            var @from     = new Fixed3(Fixed._5,  Fixed._0,   Fixed._5);
+            var to     = new Fixed3(Fixed._0, Fixed._0, Fixed._0);
+            var lerped = FixedMath.Lerp(@from, to, Fixed._0_50);
 
-            lerped.Should().Be(new fp3(fp._2+fp._0_50, fp._0, fp._2 +fp._0_50));
+            lerped.Should().Be(new Fixed3(Fixed._2+Fixed._0_50, Fixed._0, Fixed._2 +Fixed._0_50));
         }
 
         [Test]
         public void MoveTowardsTest()
         {
-            var current = fp3.one;
-            var target = new fp3(fp._5, fp._1, fp._1);
+            var current = Fixed3.one;
+            var target = new Fixed3(Fixed._5, Fixed._1, Fixed._1);
 
-            var step1 = fixmath.MoveTowards(current, target, fp._1);
-            step1.Should().Be(new fp3(fp._2, fp._1, fp._1));
+            var step1 = FixedMath.MoveTowards(current, target, Fixed._1);
+            step1.Should().Be(new Fixed3(Fixed._2, Fixed._1, Fixed._1));
             
-            var step2 = fixmath.MoveTowards(current, target, fp._10);
-            step2.Should().Be(new fp3(fp._5, fp._1, fp._1));
+            var step2 = FixedMath.MoveTowards(current, target, Fixed._10);
+            step2.Should().Be(new Fixed3(Fixed._5, Fixed._1, Fixed._1));
         }
     }
 }

@@ -68,91 +68,91 @@ namespace Deterministic.FixedPoint {
         
         /// <summary>Returns value in range [0, 1]</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public fp NextFp() {
-            return new fp(NextInt(0, 65535));
+        public Fixed NextFp() {
+            return new Fixed(NextInt(0, 65535));
         }
         
         /// <summary>Returns vector with all components in range [0, 1]</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public fp2 NextFp2() {
-            return new fp2(NextFp(), NextFp());
+        public Fixed2 NextFp2() {
+            return new Fixed2(NextFp(), NextFp());
         }
         
         /// <summary>Returns vector with all components in range [0, 1]</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public fp3 NextFp3() {
-            return new fp3(NextFp(), NextFp(), NextFp());
+        public Fixed3 NextFp3() {
+            return new Fixed3(NextFp(), NextFp(), NextFp());
         }
         
         /// <summary>Returns vector with all components in range [0, 1]</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public fp4 NextFp4() {
-            return new fp4(NextFp(), NextFp(), NextFp(), NextFp());
+        public Fixed4 NextFp4() {
+            return new Fixed4(NextFp(), NextFp(), NextFp(), NextFp());
         }
 
 
         /// <summary>Returns value in range [0, max]</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public fp NextFp(fp max) {
+        public Fixed NextFp(Fixed max) {
             return NextFp() * max;
         }
         
         /// <summary>Returns vector with all components in range [0, max]</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public fp2 NextFp2(fp2 max) {
+        public Fixed2 NextFp2(Fixed2 max) {
             return NextFp2() * max;
         }
         
         /// <summary>Returns vector with all components in range [0, max]</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public fp3 NextFp3(fp3 max) {
+        public Fixed3 NextFp3(Fixed3 max) {
             return NextFp3() * max;
         }
         
         /// <summary>Returns vector with all components in range [0, max]</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public fp4 NextFp4(fp4 max) {
+        public Fixed4 NextFp4(Fixed4 max) {
             return NextFp4() * max;
         }
 
         /// <summary>Returns value in range [min, max]</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public fp NextFp(fp min, fp max) {
+        public Fixed NextFp(Fixed min, Fixed max) {
             return NextFp() * (max - min) + min;
         }
 
         /// <summary>Returns vector with all components in range [min, max]</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public fp2 NextFp2(fp2 min, fp2 max) {
+        public Fixed2 NextFp2(Fixed2 min, Fixed2 max) {
             return NextFp2() * (max - min) + min;
         }
         
         /// <summary>Returns vector with all components in range [min, max]</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public fp3 NextFp3(fp3 min, fp3 max) {
+        public Fixed3 NextFp3(Fixed3 min, Fixed3 max) {
             return NextFp3() * (max - min) + min;
         }
         
         /// <summary>Returns vector with all components in range [min, max]</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public fp4 NextFp4(fp4 min, fp4 max) {
+        public Fixed4 NextFp4(Fixed4 min, Fixed4 max) {
             return NextFp4() * (max - min) + min;
         }
         
         /// <summary>Returns a normalized 2D direction</summary>
-        public fp2 NextDirection2D() {
-            var angle = NextFp() * fp.pi * fp._2;
-            fixmath.SinCos(angle, out var sin, out var cos);
-            return new fp2(sin,cos);
+        public Fixed2 NextDirection2D() {
+            var angle = NextFp() * Fixed.pi * Fixed._2;
+            FixedMath.SinCos(angle, out var sin, out var cos);
+            return new Fixed2(sin,cos);
         }
         
         /// <summary>Returns a normalized 3D direction</summary>
-        public fp3 NextDirection3D() {
-            var z = NextFp(fp._2) - fp._1;
-            var r = fixmath.Sqrt(fixmath.Max(fp._1 - z * z, fp._0));
-            var angle = NextFp(fp.pi2);
-            fixmath.SinCos(angle, out var sin, out var cos);
-            return new fp3(cos * r, sin * r, z);
+        public Fixed3 NextDirection3D() {
+            var z = NextFp(Fixed._2) - Fixed._1;
+            var r = FixedMath.Sqrt(FixedMath.Max(Fixed._1 - z * z, Fixed._0));
+            var angle = NextFp(Fixed.pi2);
+            FixedMath.SinCos(angle, out var sin, out var cos);
+            return new Fixed3(cos * r, sin * r, z);
         }
     }
 }

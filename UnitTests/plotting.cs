@@ -22,10 +22,10 @@ namespace UnitTests {
             foreach (var tan in tans) {
                 var correctTan = Math.Atan(tan);
                 correctValue.Add(correctTan);
-                var aprox1Tan = fixmath.Atan(fp.ParseUnsafe((float) tan)).AsDouble;
+                var aprox1Tan = FixedMath.Atan(Fixed.ParseUnsafe((float) tan)).AsDouble;
                 approxValue1.Add(aprox1Tan);
                 approxValueError1.Add(correctTan - aprox1Tan);
-                var aprox2Tan = fixmath.AtanApproximated(fp.ParseUnsafe((float) tan)).AsDouble;
+                var aprox2Tan = FixedMath.AtanApproximated(Fixed.ParseUnsafe((float) tan)).AsDouble;
                 approxValue2.Add(aprox2Tan);
                 approxValueError2.Add(correctTan - aprox2Tan);
             }
@@ -58,7 +58,7 @@ namespace UnitTests {
             foreach (var tan in xValues) {
                 var correctTan = Math.Atan2(tan, 1);
                 correctValue.Add(correctTan);
-                var aprox1Tan = fixmath.Atan2(fp.ParseUnsafe((float) tan), fp._1).AsDouble;
+                var aprox1Tan = FixedMath.Atan2(Fixed.ParseUnsafe((float) tan), Fixed._1).AsDouble;
                 approxValue1.Add(aprox1Tan);
                 approxValueError1.Add(correctTan - aprox1Tan);
             }

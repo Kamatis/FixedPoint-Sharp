@@ -1,5 +1,5 @@
 ﻿namespace Deterministic.FixedPoint {
-    public static partial class fixlut {
+    public static partial class FixedLut {
         public const int  FRACTIONS_COUNT = 5;
         public const int  PRECISION       = 16;
         public const int  SHIFT           = 16 - 9;
@@ -29,7 +29,7 @@
                 value = -value;
             }
 
-            value += fp._0_25.value;
+            value += Fixed._0_25.value;
             
             if (value >= 65536) {
                 value -= 65536;
@@ -104,7 +104,7 @@
             if (flag)
                 result = -result;
 
-            result += fp.pi_half.value;
+            result += Fixed.pi_half.value;
             return result;
         }
     }
