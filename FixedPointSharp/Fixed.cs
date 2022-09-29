@@ -29,6 +29,7 @@ namespace Deterministic.FixedPoint {
         public static readonly Fixed _99  = 99;
         public static readonly Fixed _100 = 100;
         public static readonly Fixed _200 = 200;
+        public static readonly Fixed _360 = Parse(360);
 
         public static readonly Fixed _0_01 = _1 / _100;
         public static readonly Fixed _0_02 = _0_01 * 2;
